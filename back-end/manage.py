@@ -9,8 +9,8 @@
 """
 from flask_migrate import MigrateCommand, Migrate
 from flask_script import Manager
-from blog import create_app, db
-from blueblog.models import Admin, Category, Post, Comment
+from app import create_app, db
+# from blueblog.models import Admin, Category, Post, Comment
 
 app = create_app()
 manager = Manager(app)

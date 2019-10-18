@@ -8,9 +8,11 @@
 @desc:
 """
 import os
+from dotenv import load_dotenv
 
 
-basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+basedir = os.path.abspath(os.path.dirname(__file__))  # 项目的根目录  "blog/back-end"
+load_dotenv(os.path.join(basedir, '.env'))  # 载入环境配置文件
 # print(os.path.dirname(__file__))
 # print(os.path.dirname(os.path.dirname(__file__)))
 # print(basedir)
