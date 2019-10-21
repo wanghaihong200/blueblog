@@ -7,13 +7,11 @@
 @time: 2019/10/9 17:55
 @desc:
 """
-from flask import Flask, render_template
-# from blueblog.blueprints.auth import auth_bp
-# from blueblog.blueprints.admin import admin_bp
-# from blueblog.blueprints.blog import blog_bp
-# from blueblog.settings import config, basedir
+from flask import Flask
+from app.api import bp
+from settings import config
 import os
-# from blueblog.extensions import bootstrap, db, migrate, moment, ckeditor, mail
+from extensions import bootstrap, db, migrate, moment, ckeditor, mail
 # from blueblog.models import Admin, Category
 import click
 
@@ -28,7 +26,6 @@ def register_extensions(app):
     mail.init_app(app)
 
 
-
 def register_logging(app):
     # 日志
     pass
@@ -36,9 +33,9 @@ def register_logging(app):
 
 def register_blueprints(app):
     # 注册路由
-    app.register_blueprint(auth_bp, url_prefix='/auth')
-    app.register_blueprint(admin_bp, url_prefix='/admin')
-    app.register_blueprint(blog_bp, url_prefix='/blog')
+    app.register_blueprint(bp, url_prefix='/api')
+    # app.register_blueprint(admin_bp, url_prefix='/admin')
+    # app.register_blueprint(blog_bp, url_prefix='/blog')
 
 
 def register_shell_context(app):
@@ -50,11 +47,12 @@ def register_shell_context(app):
 
 def register_template_context(app):
     # 注册模板上下文处理函数
-    @app.context_processor
-    def make_template_context():
-        admin = Admin.query.first()
-        categories = Category.query.order_by(Category.name).all()
-        return dict(admin=admin, categories=categories)
+    # @app.context_processor
+    # def make_template_context():
+    #     admin = Admin.query.first()
+    #     categories = Category.query.order_by(Category.name).all()
+    #     return dict(admin=admin, categories=categories)
+    pass
 
 
 def register_errors(app):
@@ -96,7 +94,7 @@ def create_app(config_name=None, template_folder='templates'):
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')
 
-    app = Flask('blueblog', template_folder=template_folder)
+    app = Flask('blog')
     app.config.from_object(config[config_name])
 
     register_extensions(app)  # 第三方扩展初始化
