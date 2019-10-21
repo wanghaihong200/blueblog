@@ -14,4 +14,3 @@ Faker==2.0.2
 Flask_CKEditor==0.4.3
 Werkzeug==0.15.6
 Bootstrap_Flask==1.1.0
-flask_bootstrap==3.3.7.1
