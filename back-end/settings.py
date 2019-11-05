@@ -12,11 +12,11 @@ from dotenv import load_dotenv
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))  # 项目的根目录  "blog/back-end"
-load_dotenv(os.path.join(basedir, '.env'))  # 载入环境配置文件
+load_dotenv(os.path.join(basedir, '.flaskenv'))  # 载入环境配置文件
 # print(os.path.dirname(__file__))
 # print(os.path.dirname(os.path.dirname(__file__)))
 # print(basedir)
-# print(os.urandom(16))   # 生成密匙
+
 
 
 class BaseConfig(object):
@@ -38,22 +38,23 @@ class BaseConfig(object):
 
 
 class DevelopmentConfig(BaseConfig):
-    USERNAME = 'admin'  # 用户名
-    PASSWORD = 'admin'  # 密码
-    HOST = '127.0.0.1'  # 数据库地址
-    PORT = '3306'  # 端口
-    DATABASE = 'message'  # 数据库名
+    USERNAME = os.getenv('USER', 'xxx')  # 用户名
+    PASSWORD = os.getenv('PASSWORD', 'xxx')  # 密码
+    HOST = os.getenv('HOST', '127.0.0.1')  # 数据库地址
+    PORT = os.getenv('PORT', '3306')  # 端口
+    DATABASE = os.getenv('DATABASE', 'xxx')  # 数据库名
     database_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8'.format(
         USERNAME, PASSWORD, HOST, PORT, DATABASE)
     SQLALCHEMY_DATABASE_URI = database_url
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestingConfig(BaseConfig):
-    USERNAME = 'admin'  # 用户名
-    PASSWORD = 'admin'  # 密码
-    HOST = '127.0.0.1'  # 数据库地址
-    PORT = '3306'  # 端口
-    DATABASE = 'message'  # 数据库名
+    USERNAME = os.getenv('USER', 'xxx')  # 用户名
+    PASSWORD = os.getenv('PASSWORD', 'xxx')  # 密码
+    HOST = os.getenv('HOST', '127.0.0.1')  # 数据库地址
+    PORT = os.getenv('PORT', '3306')  # 端口
+    DATABASE = os.getenv('DATABASE', 'xxx')  # 数据库名
     database_url = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format(
         USERNAME, PASSWORD, HOST, PORT, DATABASE)
     SQLALCHEMY_DATABASE_URI = database_url
@@ -62,14 +63,15 @@ class TestingConfig(BaseConfig):
 
 
 class ProductionConfig(BaseConfig):
-    USERNAME = 'admin'  # 用户名
-    PASSWORD = 'admin'  # 密码
-    HOST = '127.0.0.1'  # 数据库地址
-    PORT = '3306'  # 端口
-    DATABASE = 'message'  # 数据库名
+    USERNAME = os.getenv('USER', 'xxx')  # 用户名
+    PASSWORD = os.getenv('PASSWORD', 'xxx')  # 密码
+    HOST = os.getenv('HOST', '127.0.0.1')  # 数据库地址
+    PORT = os.getenv('PORT', '3306')  # 端口
+    DATABASE = os.getenv('DATABASE', 'xxx')  # 数据库名
     database_url = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format(
         USERNAME, PASSWORD, HOST, PORT, DATABASE)
     SQLALCHEMY_DATABASE_URI = database_url
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 config = {

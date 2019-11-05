@@ -9,10 +9,11 @@
 """
 from flask import Flask
 from app.api import bp
+from app.api_v2.app import bp as api_v2_bp
 from settings import config
 import os
-from extensions import bootstrap, db, migrate, moment, ckeditor, mail
-# from blueblog.models import Admin, Category
+from extensions import bootstrap, db, migrate, moment, ckeditor, mail, cors
+from app.models import User
 import click
 
 
@@ -24,6 +25,7 @@ def register_extensions(app):
     moment.init_app(app)
     ckeditor.init_app(app)
     mail.init_app(app)
+    cors.init_app(app)
 
 
 def register_logging(app):
@@ -34,6 +36,7 @@ def register_logging(app):
 def register_blueprints(app):
     # 注册路由
     app.register_blueprint(bp, url_prefix='/api')
+    app.register_blueprint(api_v2_bp, url_prefix='/api/v2')
     # app.register_blueprint(admin_bp, url_prefix='/admin')
     # app.register_blueprint(blog_bp, url_prefix='/blog')
 
@@ -42,7 +45,11 @@ def register_shell_context(app):
     # 注册shell上下文出来函数
     @app.shell_context_processor
     def make_shell_context():
-        return dict(db=db)
+        return {
+            'db': db,
+            'User': User,
+            'app': app
+        }
 
 
 def register_template_context(app):
@@ -106,3 +113,4 @@ def create_app(config_name=None, template_folder='templates'):
     register_commands(app)  # 注册自定义shell命令
 
     return app
+

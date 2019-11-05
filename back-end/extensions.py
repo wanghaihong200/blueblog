@@ -14,6 +14,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_migrate import Migrate
+from flask_cors import CORS
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -24,3 +25,4 @@ mail = Mail()
 moment = Moment()
 toolbar = DebugToolbarExtension()
 migrate = Migrate()
+cors = CORS()

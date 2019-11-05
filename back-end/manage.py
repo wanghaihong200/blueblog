@@ -12,7 +12,8 @@ from flask_script import Manager
 from app import create_app, db
 # from blueblog.models import Admin, Category, Post, Comment
 
-app = create_app()
+app = create_app(config_name='development')
+
 manager = Manager(app)
 
 # 1. 要使用flask_migrate，必须绑定app和db
