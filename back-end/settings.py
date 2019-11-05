@@ -18,7 +18,6 @@ load_dotenv(os.path.join(basedir, '.flaskenv'))  # 载入环境配置文件
 # print(basedir)
 
 
-
 class BaseConfig(object):
     SECRET_KEY = b'\x07\x83\x17!\xd3Ll\xdf$i\xd6\xa7L\xca\xb9\xad'  # 密匙
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # orm 操作追踪
@@ -27,8 +26,8 @@ class BaseConfig(object):
     MAIL_SERVER = 'smtp.163.com'
     MAIL_USE_SSL = True
     MAIL_PORT = 465
-    MAIL_USERNAME = 'wanghaihong200@163.com'
-    MAIL_PASSWORD = 'whh200792'
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME', 'xxx')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD', 'xxx')
     MAIL_DEFAULT_SENDER = ('海海', MAIL_USERNAME)
 
     BLUELOG_EMAIL = 'AAA'

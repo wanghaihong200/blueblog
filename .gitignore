@@ -99,7 +99,6 @@ celerybeat-schedule
 
 # Environments
 back-end/.flaskenv
-back-end/settings.py
 .venv
 env/
 venv/
