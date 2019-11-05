@@ -98,7 +98,6 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
-back-end/.flaskenv
 .venv
 env/
 venv/
@@ -125,3 +124,4 @@ dmypy.json
 .pyre/
 
 .idea/workspace.xml
+/back-end/.env
