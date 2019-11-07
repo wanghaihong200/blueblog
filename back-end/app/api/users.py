@@ -10,7 +10,6 @@
 from app.api import bp
 import re
 from flask import request, jsonify, url_for
-from app import db
 from app.api.errors import bad_request
 from app.models import User
 

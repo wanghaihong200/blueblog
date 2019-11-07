@@ -11,6 +11,7 @@ from extensions import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import url_for
+import json
 
 
 class PaginatedAPIMixin(object):
@@ -40,7 +41,7 @@ class User(PaginatedAPIMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128)) # 使用hash加密 密码
+    password_hash = db.Column(db.String(128))  # 使用hash加密 密码
     create_time = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self):
@@ -58,7 +59,7 @@ class User(PaginatedAPIMixin, db.Model):
             'id': self.id,
             'username': self.username,
             '_links': {
-                'self': url_for('api.get_user', id=self.id)
+                'self': url_for('api_v2.user', id=self.id)
             }
         }
         if include_email:
@@ -72,3 +73,4 @@ class User(PaginatedAPIMixin, db.Model):
                 setattr(self, field, data[field])
         if new_user and 'password' in data:
             self.set_password(data['password'])
+
